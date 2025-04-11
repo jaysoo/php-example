@@ -69,7 +69,3 @@ launch-templates:
       - name: Composer Install
         script: |
           $HOME/composer install -d apps/example
-
-      - name: Pnpm Install
-        script: |
-          pnpm install --frozen-lockfile
