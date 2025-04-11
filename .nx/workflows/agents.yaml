@@ -69,7 +69,7 @@ launch-templates:
 
       - name: Install PNPM
         script: |
-          npm install -g pnpm
+          npm install -fg pnpm
 
       - name: Pnpm Install
         script: |
