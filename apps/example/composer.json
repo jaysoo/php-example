@@ -1,9 +1,9 @@
 {
-  "name": "bubilek/test",
-  "description": "Basic using PHPUnit",
+  "name": "example/test",
+  "description": "Basic example of using PHPUnit",
   "autoload": {
     "psr-4": {
-      "BasicPHPUnitTest\\": "app/"
+      "Example\\": "src/"
     }
   },
   "require-dev": {

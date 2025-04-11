@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use BasicPHPUnitTest\geometry\Point;
+use Example\geometry\Point;
 
 final class PointTest extends PHPUnit\Framework\TestCase
 {

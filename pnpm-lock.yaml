@@ -7,11 +7,10 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@nx/devkit':
-        specifier: 20.7.2
-        version: 20.7.2(nx@20.7.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.15))(@swc/types@0.1.21)(typescript@5.7.3))(@swc/core@1.5.29(@swc/helpers@0.5.15)))
     devDependencies:
+      '@nx-php/phpunit':
+        specifier: workspace:*
+        version: link:packages/phpunit
       '@nx/jest':
         specifier: 20.7.2
         version: 20.7.2(@babel/traverse@7.27.0)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.15))(@swc/types@0.1.21)(typescript@5.7.3))(@swc/core@1.5.29(@swc/helpers@0.5.15))(@types/node@18.16.9)(babel-plugin-macros@3.1.0)(nx@20.7.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.15))(@swc/types@0.1.21)(typescript@5.7.3))(@swc/core@1.5.29(@swc/helpers@0.5.15)))(typescript@5.7.3)
@@ -48,6 +47,15 @@ importers:
 
   packages/phpunit:
     dependencies:
+      '@nx/devkit':
+        specifier: '>=20.7.0'
+        version: 20.7.2(nx@20.7.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.15))(@swc/types@0.1.21)(typescript@5.7.3))(@swc/core@1.5.29(@swc/helpers@0.5.15)))
+      fast-xml-parser:
+        specifier: ^5.2.0
+        version: 5.2.0
+      minimatch:
+        specifier: ^10.0.1
+        version: 10.0.1
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1751,6 +1759,10 @@ packages:
   fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
 
+  fast-xml-parser@5.2.0:
+    resolution: {integrity: sha512-Uw9+Mjt4SBRud1IcaYuW/O0lW8SKKdMl5g7g24HiIuyH5fQSD+AVLybSlJtqLYEbytVFjWQa5DMGcNgeksdRBg==}
+    hasBin: true
+
   fastq@1.19.1:
     resolution: {integrity: sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==}
 
@@ -2296,6 +2308,10 @@ packages:
     resolution: {integrity: sha512-e5ISH9xMYU0DzrT+jl8q2ze9D6eWBto+I8CNpe+VI+K2J/F/k3PdkdTdz4wvGVH4NTpo+NRYTVIuMQEMMcsLqg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
+  minimatch@10.0.1:
+    resolution: {integrity: sha512-ethXTt3SGGR+95gudmqJ1eNhRO7eGEGIgYA9vnPatK4/etz2MEVDno5GMCibdMTuBMyElzIlgxMna3K94XDIDQ==}
+    engines: {node: 20 || >=22}
+
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
 
@@ -2654,6 +2670,9 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  strnum@2.0.5:
+    resolution: {integrity: sha512-YAT3K/sgpCUxhxNMrrdhtod3jckkpYwH6JAuwmUdXZsmzH1wUyzTMrrK2wYCEEqlKwrWDd35NeuUkbBy/1iK+Q==}
 
   strtok3@9.1.1:
     resolution: {integrity: sha512-FhwotcEqjr241ZbjFzjlIYg6c5/L/s4yBGWSMvJ9UoExiSqL+FnFA/CaeZx17WGaZMS/4SOZp8wH18jSS4R4lw==}
@@ -4875,6 +4894,10 @@ snapshots:
 
   fast-levenshtein@2.0.6: {}
 
+  fast-xml-parser@5.2.0:
+    dependencies:
+      strnum: 2.0.5
+
   fastq@1.19.1:
     dependencies:
       reusify: 1.1.0
@@ -5536,6 +5559,10 @@ snapshots:
 
   mimic-response@4.0.0: {}
 
+  minimatch@10.0.1:
+    dependencies:
+      brace-expansion: 2.0.1
+
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
@@ -5901,6 +5928,8 @@ snapshots:
   strip-final-newline@2.0.0: {}
 
   strip-json-comments@3.1.1: {}
+
+  strnum@2.0.5: {}
 
   strtok3@9.1.1:
     dependencies:

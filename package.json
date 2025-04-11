@@ -8,6 +8,7 @@
     "@nx/jest": "20.7.2",
     "@nx/js": "20.7.2",
     "@nx/plugin": "20.7.2",
+    "@nx-php/phpunit": "workspace:*",
     "@swc-node/register": "~1.9.1",
     "@swc/cli": "~0.6.0",
     "@swc/core": "~1.5.7",
@@ -16,8 +17,5 @@
     "nx": "20.7.2",
     "tslib": "^2.3.0",
     "typescript": "~5.7.2"
-  },
-  "dependencies": {
-    "@nx/devkit": "20.7.2"
   }
 }

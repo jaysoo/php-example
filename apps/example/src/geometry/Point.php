@@ -1,6 +1,6 @@
 <?php
 
-namespace BasicPHPUnitTest\geometry;
+namespace Example\geometry;
 
 class Point
 {

@@ -1,7 +1,6 @@
 {
   "name": "@nx-php/phpunit",
   "version": "0.0.1",
-  "private": true,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -44,6 +43,9 @@
     }
   },
   "dependencies": {
+    "@nx/devkit": ">=20.7.0",
+    "fast-xml-parser": "^5.2.0",
+    "minimatch": "^10.0.1",
     "tslib": "^2.3.0"
   }
 }

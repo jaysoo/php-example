@@ -1,6 +1,6 @@
 <?php
 
-use BasicPHPUnitTest\geometry;
+use Example\geometry;
 
 require __DIR__ . "/vendor/autoload.php";
 
