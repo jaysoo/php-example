@@ -1,0 +1,45 @@
+launch-templates:
+  linux-medium:
+    resource-class: 'docker_linux_amd64/medium+'
+    image: 'ubuntu22.04-node20.11-v10'
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      TZ: Etc/UTC
+    init-steps:
+      - name: Checkout
+        uses: 'nrwl/nx-cloud-workflows/v5/workflow-steps/checkout/main.yaml'
+      - name: Cache restore
+        uses: 'nrwl/nx-cloud-workflows/v5/workflow-steps/cache/main.yaml'
+        inputs:
+          key: 'pnpm-lock.yaml'
+          paths: .pnpm-store
+          base-branch: 'master'
+
+      - name: Install zip and unzip
+        script: sudo apt-get -yqq install zip unzip
+
+      - name: Install PHP
+        script: |
+          sudo apt-get update
+          sudo apt-get install -y dialog
+          sudo apt-get install -y php
+
+      - name: Install Composer
+        script: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'.PHP_EOL; } else { echo 'Installer corrupt'.PHP_EOL; unlink('composer-setup.php'); exit(1); }"
+          php composer-setup.php
+          php -r "unlink('composer-setup.php');"
+          mv composer.phar $HOME/composer
+
+      - name: Composer Install
+        script: |
+          $HOME/composer install -d apps/example
+
+      - name: Install Pnpm
+        script: |
+          npm install -g pnpm@9.8.0
+
+      - name: Pnpm Install
+        script: |
+          pnpm install --frozen-lockfile
