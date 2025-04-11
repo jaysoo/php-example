@@ -1,0 +1,78 @@
+launch-templates:
+  linux-medium:
+    resource-class: 'docker_linux_amd64/medium+'
+    image: 'ubuntu22.04-node20.11-v10'
+    init-steps:
+      - name: Checkout
+        uses: 'nrwl/nx-cloud-workflows/v5/workflow-steps/checkout/main.yaml'
+      - name: Cache restore
+        uses: 'nrwl/nx-cloud-workflows/v5/workflow-steps/cache/main.yaml'
+        inputs:
+          key: 'pnpm-lock.yaml'
+          paths: .pnpm-store
+          base-branch: 'main'
+
+      - name: Install zip and unzip
+        script: sudo apt-get -yqq install zip unzip
+
+      - name: Install PHP
+        script: |
+          sudo apt-get update
+          cd /tmp
+          cat > install.cjs << 'EOF'
+          const { spawn } = require('child_process');
+          const pty = require('node-pty');
+          
+          const shell = pty.spawn('sudo', ['apt-get', 'install', '-y', 'tzdata'], {
+            name: 'xterm-color',
+            cols: 80,
+            rows: 30,
+            cwd: process.env.HOME,
+            env: process.env
+          });
+          
+          shell.on('data', (data) => {
+            console.log(data);
+            if (data.includes('Geographic area:')) {
+              shell.write('12\r');
+            }
+            if (data.includes('Time zone:')) {
+              shell.write('32\r');
+            }
+          });
+          
+          shell.on('exit', (code) => {
+            if (code === 0) {
+              const php = spawn('sudo', ['apt-get', 'install', '-y', 'php']);
+              php.on('close', (code) => process.exit(code));
+            } else {
+              process.exit(code);
+            }
+          });
+          EOF
+          npm install node-pty
+          node install.cjs
+          sudo apt-get install -y php php-xml php-mbstring
+          cd -
+
+      - name: Install Composer
+        script: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'.PHP_EOL; } else { echo 'Installer corrupt'.PHP_EOL; unlink('composer-setup.php'); exit(1); }"
+          php composer-setup.php
+          php -r "unlink('composer-setup.php');"
+          mv composer.phar $HOME/composer
+
+      - name: Composer Install
+        script: |
+          $HOME/composer install -d apps/example
+
+      - name: Install PNPM
+        script: |
+          npm install -fg pnpm
+
+      - name: Pnpm Install
+        script: |
+          ls -lsa 
+          pnpm install
+
