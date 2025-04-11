@@ -2,9 +2,6 @@ launch-templates:
   linux-medium:
     resource-class: 'docker_linux_amd64/medium+'
     image: 'ubuntu22.04-node20.11-v10'
-    env:
-      DEBIAN_FRONTEND: noninteractive
-      TZ: Etc/UTC
     init-steps:
       - name: Checkout
         uses: 'nrwl/nx-cloud-workflows/v5/workflow-steps/checkout/main.yaml'
@@ -13,7 +10,7 @@ launch-templates:
         inputs:
           key: 'pnpm-lock.yaml'
           paths: .pnpm-store
-          base-branch: 'master'
+          base-branch: 'main'
 
       - name: Install zip and unzip
         script: sudo apt-get -yqq install zip unzip
@@ -56,7 +53,7 @@ launch-templates:
           npm install node-pty
           node install.cjs
           sudo apt-get install -y php php-xml php-mbstring
-
+          cd -
 
       - name: Install Composer
         script: |
@@ -69,3 +66,13 @@ launch-templates:
       - name: Composer Install
         script: |
           $HOME/composer install -d apps/example
+
+      - name: Install PNPM
+        script: |
+          npm install -g pnpm
+
+      - name: Pnpm Install
+        script: |
+          ls -lsa 
+          pnpm install
+
