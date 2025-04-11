@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 use Example\geometry\Point;
 
-final class PointTest extends PHPUnit\Framework\TestCase
+final class Point32Test extends PHPUnit\Framework\TestCase
 {
 
     public function testStringRepresentation(): void
     {
+        sleep(3);
         $point = new Point(0, 0);
         foreach ([
             [0, 0],
@@ -25,6 +26,7 @@ final class PointTest extends PHPUnit\Framework\TestCase
 
     public function testSettersAndGetters(): void
     {
+        sleep(3);
         $point = new Point(1, 2);
         $this->assertSame($point->getX(), 1);
         $this->assertSame($point->getY(), 2);
@@ -35,6 +37,7 @@ final class PointTest extends PHPUnit\Framework\TestCase
 
     public function testDistanceFromCenter(): void
     {
+        sleep(3);
         $center = new Point(0, 0);
         $point = new Point(0, 0);
         foreach ([
