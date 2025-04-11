@@ -70,10 +70,6 @@ launch-templates:
         script: |
           $HOME/composer install -d apps/example
 
-      - name: Install Pnpm
-        script: |
-          npm install -g pnpm@9.8.0
-
       - name: Pnpm Install
         script: |
           pnpm install --frozen-lockfile
