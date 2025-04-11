@@ -55,7 +55,7 @@ launch-templates:
           EOF
           npm install node-pty
           node install.cjs
-          sudo apt-get install -y php-cli php-xml
+          sudo apt-get install -y php
 
 
       - name: Install Composer
