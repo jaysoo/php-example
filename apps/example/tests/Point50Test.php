@@ -9,7 +9,7 @@ final class Point50Test extends PHPUnit\Framework\TestCase
 
     public function testStringRepresentation(): void
     {
-        sleep(3);
+        sleep(8);
         $point = new Point(0, 0);
         foreach ([
             [0, 0],
@@ -26,7 +26,7 @@ final class Point50Test extends PHPUnit\Framework\TestCase
 
     public function testSettersAndGetters(): void
     {
-        sleep(3);
+        sleep(8);
         $point = new Point(1, 2);
         $this->assertSame($point->getX(), 1);
         $this->assertSame($point->getY(), 2);
@@ -37,7 +37,7 @@ final class Point50Test extends PHPUnit\Framework\TestCase
 
     public function testDistanceFromCenter(): void
     {
-        sleep(3);
+        sleep(8);
         $center = new Point(0, 0);
         $point = new Point(0, 0);
         foreach ([
